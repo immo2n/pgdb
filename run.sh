@@ -82,17 +82,16 @@ if [ "${ENABLE_PGADMIN:-false}" = "true" ] || [ "${ENABLE_PGADMIN:-false}" = "1"
     COMPOSE_PROFILES="--profile pgadmin"
 fi
 
-# Get list of containers defined in docker-compose.yaml
-CONTAINERS=$(docker compose $COMPOSE_PROFILES ps --services 2>/dev/null)
+# Get list of all containers defined in docker-compose.yaml (regardless of running status)
+ALL_CONTAINERS=$(docker compose $COMPOSE_PROFILES config --services 2>/dev/null)
 
-if [ -z "$CONTAINERS" ]; then
+if [ -z "$ALL_CONTAINERS" ]; then
     print_warning "No services found in docker-compose.yaml"
     exit 1
 fi
 
 # Check which containers are running
 RUNNING_CONTAINERS=$(docker compose $COMPOSE_PROFILES ps --services --filter "status=running" 2>/dev/null)
-ALL_CONTAINERS=$(docker compose $COMPOSE_PROFILES ps --services 2>/dev/null)
 
 # Count containers
 TOTAL_COUNT=$(echo "$ALL_CONTAINERS" | wc -l)
