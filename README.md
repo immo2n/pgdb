@@ -2,6 +2,13 @@
 
 A simple Docker-based PostgreSQL database setup with optional pgAdmin web interface.
 
+## 📥 Clone
+
+```bash
+git clone https://github.com/immo2n/pgdb.git
+cd pgdb
+```
+
 ## 🚀 Quick Start
 
 1. **Setup Docker** (first time only):
@@ -54,7 +61,7 @@ The script will:
 
 ### Stop Services
 ```bash
-docker compose down
+./stop.sh
 ```
 
 ### View Logs
@@ -104,7 +111,8 @@ To disable, either remove `ENABLE_PGADMIN` or set it to `false`.
 DataBaseImager/
 ├── docker-compose.yaml  # Service definitions
 ├── setup.sh            # Docker installation script
-├── run.sh              # Service management script
+├── run.sh              # Start services script
+├── stop.sh             # Stop services script
 └── .env                # Environment variables (create this)
 ```
 
